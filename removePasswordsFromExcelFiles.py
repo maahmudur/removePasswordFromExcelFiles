@@ -1,11 +1,13 @@
 # imports
 import os, win32com.client, pythoncom 
+
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 # objects needed: USER TO MODIFY
 source = r'C:\Users\mahmudur\Desktop\TempData\All OB\4002'                                              # source folder
 destination = r'C:\Users\mahmudur\Desktop\TempData\All OB\4002\Operation Bulletine\password_free'       # target directory
-password = 'fkl'                                                                                        # password to open excel files
+password = 'fkl'
+                                                                                        # password to open excel files
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 # Routine for iterating through the folder strucures in the source folder to create a list of paths to excel files. 
@@ -29,6 +31,7 @@ for root, dirs, files in os.walk(source):                                     # 
             else:
                 if full_path_dict[file_][1] > file_size:                      # else if size is greater than existing entry update dict
                     full_path_dict[file_] = ((root + '\\' + file_), file_info.st_size)
+
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 # Routine for iterating the paths object created above. For each file the routine opens it with the password,
@@ -48,7 +51,7 @@ for path_tuple in full_path_dict.values():                # iterate through full
     except pythoncom.com_error:
         errors.append(filename)
 else:
-    print 'All done'
+    print 'All Done'
     print len(errors)
     xcl.Quit()
         
